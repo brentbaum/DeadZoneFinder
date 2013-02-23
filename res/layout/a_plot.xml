@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="20dp" >
+
+    <TextView
+        android:id="@+id/congratulation_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/congratulation_label"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/you_are_awesome_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/congratulation_text"
+        android:gravity="center"
+        android:text="@string/you_are_awesome_label"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/explaination_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/you_are_awesome_text"
+        android:text="@string/explaination_label" />
+
+    <ToggleButton
+        android:id="@+id/toggle_data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/explaination_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/start_tracking_label"
+        android:textOff="@string/start_tracking_label"
+        android:textOn="@string/stop_collecting" 
+        android:onClick="onToggleClick"/>
+    
+    <TextView
+        android:id="@+id/privacy_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggle_data"
+        android:textColor="@color/text_light" />
+
+    <TextView
+        android:id="@+id/privacy_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/privacy_label" />
+
+</RelativeLayout>
