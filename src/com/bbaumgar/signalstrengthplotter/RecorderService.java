@@ -40,7 +40,7 @@ public class RecorderService extends Service {
 
 	// Unique Identification Number for the Notification.
 	// We use it on Notification start, and to cancel it.
-	private int NOTIFICATION = 0;// R.string.local_service_started;
+	private int NOTIFICATION = 200;// R.string.local_service_started;
 
 	@Override
 	public void onCreate() {
@@ -126,7 +126,7 @@ public class RecorderService extends Service {
 		
 		 Notification noti = new NotificationCompat.Builder(getBaseContext())
          .setContentTitle("Collecting Data")
-         .setContentText("Tracking cell and gps strength")
+         .setContentText("Readings sent: "+numberOfSends)
          .setSmallIcon(R.drawable.ic_launcher)
          .setContentIntent(contentIntent)
          .build();
@@ -146,6 +146,7 @@ public class RecorderService extends Service {
 				server.sendLocationData(lastLat, lastLon, signal,
 						new SendDataCallback());
 				numberOfSends++;
+				showNotification();
 			}
 	}
 
@@ -186,7 +187,6 @@ public class RecorderService extends Service {
 
 	public class SendDataCallback extends PostCallback {
 		public void onDataReceived(String data) {
-			//Log.v("Received:", data);
 		}
 	}
 

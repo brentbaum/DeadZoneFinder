@@ -12,7 +12,10 @@ import android.view.View;
 import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import org.acra.*;
+import org.acra.annotation.*;
 
+@ReportsCrashes(formKey = "dFF5NkRIME1lWWJqM1RxUUtFb2JuWmc6MQ") 
 public class PlotActivity extends SherlockActivity {
 	String TAG = "PlotSignalActivity";
 	private RecorderService mBoundService;
@@ -27,7 +30,6 @@ public class PlotActivity extends SherlockActivity {
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Signal Data Collection");
-		
 		mConnection = new ServiceConnection() {
 		    public void onServiceConnected(ComponentName className, IBinder service) {
 		        mBoundService = ((RecorderService.RecorderBinder)service).getService();
@@ -36,6 +38,10 @@ public class PlotActivity extends SherlockActivity {
 		        mBoundService = null;
 		    }
 		};
+		if(mBoundService != null) {
+			ToggleButton t = (ToggleButton)findViewById(R.id.toggle_data);
+			t.setChecked(true);
+		}
 	}
 	
 	private void doBindService() {
@@ -43,15 +49,17 @@ public class PlotActivity extends SherlockActivity {
 	    // class name because we want a specific service implementation that
 	    // we know will be running in our own process (and thus won't be
 	    // supporting component replacement by other applications).
-	    bindService(new Intent(this, 
-	            RecorderService.class), mConnection, Context.BIND_AUTO_CREATE);
+		Intent n = new Intent(this, RecorderService.class);
+		startService(new Intent(this, RecorderService.class));
+	    /*bindService(new Intent(this, 
+	            RecorderService.class), mConnection, Context.BIND_AUTO_CREATE);*/
 	    mIsBound = true;
 	}
 
 	void doUnbindService() {
 	    if (mIsBound) {
 	        // Detach our existing connection.
-	        unbindService(mConnection);
+	        //unbindService(mConnection);
 	        stopService(new Intent(this, RecorderService.class));
 	        mIsBound = false;
 	    }
@@ -66,10 +74,10 @@ public class PlotActivity extends SherlockActivity {
 	public void onToggleClick(View view) {
 	    boolean on = ((ToggleButton) view).isChecked();
 	    if(on) {
-	    	doBindService();
+			startService(new Intent(this, RecorderService.class));
 	    }
 	    if(!on) {
-	    	doUnbindService();
+	        stopService(new Intent(this, RecorderService.class));
 	    }
 	}
 }
