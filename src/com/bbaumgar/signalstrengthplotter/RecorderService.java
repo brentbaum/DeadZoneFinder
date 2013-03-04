@@ -191,11 +191,12 @@ public class RecorderService extends Service {
 	}
 
 	public int parseSignalStrength(SignalStrength signalStrength) {
-		if (signalStrength.isGsm()) {
-			if (signalStrength.getGsmSignalStrength() != 99)
-				Toast.makeText(this, "Your phone is not supported.",
-						Toast.LENGTH_SHORT).show();
-		} else {
+		if (signalStrength.getGsmSignalStrength() != 99) {
+			Toast.makeText(this, "Your phone is not supported.",
+				Toast.LENGTH_SHORT).show();
+			return -2;
+		}
+		else {
 			final int snr = signalStrength.getEvdoSnr();
 			final int cdmaDbm = signalStrength.getCdmaDbm();
 			final int cdmaEcio = signalStrength.getCdmaEcio();
@@ -240,7 +241,6 @@ public class RecorderService extends Service {
 			}
 			return level;
 		}
-		return -1;
 	}
 
 }

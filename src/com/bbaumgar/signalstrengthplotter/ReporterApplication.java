@@ -5,7 +5,7 @@ import org.acra.annotation.*;
 
 import android.app.Application;
 
-  @ReportsCrashes(formKey = "dFF5NkRIME1lWWJqM1RxUUtFb2JuWmc6MQ") 
+  @ReportsCrashes(formKey = "dFF5NkRIME1lWWJqM1RxUUtFb2JuWmc6MQ", socketTimeout= 25000) 
   public class ReporterApplication extends Application {
 	  @Override
 	  public void onCreate() {
